@@ -53,7 +53,8 @@ async function decision () {
             showDenyButton: true,
             confirmButtonText: 'Iniciar sesión',
             denyButtonText: `Registrarse`,
-        }).then((result) => {
+        })
+        .then((result) => {
             if (result.isConfirmed) {
                 iniciar()
             } else if (result.isDenied) {
@@ -120,8 +121,8 @@ async function iniciarSesion() {
             bienvenido.innerHTML = `Bienvenido ${usuarioLogueado.usuario} !!!`;
 
         } else {
-            // decision()
-            await iniciar();
+            await decision()
+            // await iniciar();
             usuarios.forEach((usuario) => {
                 if (
                     usuario.usuario === login.usuario &&
