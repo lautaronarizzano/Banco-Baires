@@ -164,3 +164,14 @@ textarea {
 .m{
     padding-bottom: 2rem;
 }
+
+footer{
+    min-width: none;height: 6vh;
+    background-color: $primary;
+    @include flex (row, center, center, nowrap);
+    div{
+        font-size: 2rem;
+        color: white;
+    }
+}
+

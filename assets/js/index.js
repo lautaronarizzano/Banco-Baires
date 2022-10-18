@@ -6,7 +6,7 @@ async function iniciar() {
     const {
         value: formValues
     } = await Swal.fire({
-        title: 'Iniciar sesión',
+        title: 'Iniciar sesión, usuario y contraseña recomendado: admin, 1234',
         html: '<input id="swal-input1" class="swal2-input" placeholder="Usuario">' +
             '<input id="swal-input2" class="swal2-input" type="password" placeholder="Password">',
         focusConfirm: false,
@@ -20,52 +20,6 @@ async function iniciar() {
     login = new inicioSesion (formValues[0], formValues[1])
 
 }
-
-async function registro() {
-    const {
-        value: formValues
-    } = await Swal.fire({
-        title: 'Nuevo usuario',
-        html: '<input id="swal-input1" class="swal2-input">' +
-            '<input id="swal-input2" class="swal2-input">',
-        focusConfirm: false,
-        preConfirm: () => {
-            return [
-                document.getElementById('swal-input1').value,
-                document.getElementById('swal-input2').value
-            ]
-        }
-    })
-    if (formValues) {
-
-        console.log(JSON.stringify(formValues))
-
-        usuarios.push(new inicioSesion (formValues[0], formValues[1]))
-
-        decision()
-
-    }
-
-}
-
-async function decision () {
-        Swal.fire({
-            showDenyButton: true,
-            confirmButtonText: 'Iniciar sesión',
-            denyButtonText: `Registrarse`,
-        })
-        .then((result) => {
-            if (result.isConfirmed) {
-                iniciar()
-            } else if (result.isDenied) {
-                registro()
-            }
-            
-        })
-    }
-
-
-
 
 // clases
 class transaccion {
@@ -82,9 +36,9 @@ class inicioSesion {
         this.password = password
     }
 }
-//inicio de secion
 
 
+//Traer usuarios del json
 
 async function fetchUsuarios(){
     let llenarUsuarios = await fetch('./assets/js/data.json')
@@ -105,6 +59,9 @@ function inicializar() {
 }
 
 
+//inicio de sesion
+
+
 verificacion = 3
 
 let password
@@ -121,8 +78,7 @@ async function iniciarSesion() {
             bienvenido.innerHTML = `Bienvenido ${usuarioLogueado.usuario} !!!`;
 
         } else {
-            await decision()
-            // await iniciar();
+            await iniciar();
             usuarios.forEach((usuario) => {
                 if (
                     usuario.usuario === login.usuario &&
@@ -158,6 +114,7 @@ async function iniciarSesion() {
 
 iniciarSesion()
 
+//transferencias
 
 function transferencia() {
 
@@ -204,6 +161,7 @@ function transferencia() {
 
 }
 
+//comprar dolares
 
 function dolares() {
 
@@ -258,6 +216,7 @@ function dolares() {
     })
 }
 
+//plazos fijos
 
 function plazoFijo() {
     const inputDinero = document.querySelector("#dinero")
@@ -301,6 +260,7 @@ function plazoFijo() {
     })
 }
 
+//prestamos
 
 
 function prestamo() {
